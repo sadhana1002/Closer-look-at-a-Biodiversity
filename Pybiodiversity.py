@@ -62,18 +62,18 @@ def getPersonInfo(sample_number):
     }
 
 def getOtuSampleRelation(sample_number):
-    
-    results = session.query(Samples).options(load_only(sample_number)).order_by(desc(sample_number))
+    results = session.query(Samples).options(load_only(sample_number)).order_by('otu_id')
     x = []
     y = []
-    
+
     for r in results:
         row = r.__dict__
         sample_values = list(row.values())
+        print(f"{r.otu_id}-{sample_values[2]}")
         x.append(r.otu_id)
-        y.append(sum(sample_values[1:]))
+        y.append(sample_values[2])
 
-    return {
+    return{
         'x':x,
         'y':y
     }

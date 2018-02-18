@@ -6,11 +6,51 @@ function loadsample(sample){
         }
         populateBackground(response['personal']);
         populatePieChart(response['otu_distribution'])
-        // populateBubbleChart(response['otu_sample']);
+        populateBubbleChart(response['otu_sample']);
         populateGauge(response['washing_frequency']);
         console.log(response);
     });
 }
+
+function populateBubbleChart(otu_sample_data){
+    console.log("tryyyyyyyyyyyyyyyyyyy");
+    console.log(otu_sample_data);
+
+    otu_sample_data['mode'] = 'markers';
+    otu_sample_data['marker'] = {
+          size: otu_sample_data['y'].map(d=>Math.min(d*10,60)),
+          color: otu_sample_data['y'].map(d=>100+d*20)
+                }
+      
+      var data = [{
+        'y':otu_sample_data['y'],
+        'mode':'markers',
+        'marker':{
+            size: otu_sample_data['y'].map(d=>d),
+            color: otu_sample_data['y'].map(d=>100+d*20)
+                  }
+      }];
+      
+      var layout = {
+        title: 'Scatter Plot with a Color Dimension',
+        xaxis: {
+            // range: [ 0, 4000 ],
+            title: "OTUs"
+          },
+          yaxis: {
+            // range: [-100, 1000],
+            title: "Intensity found in sample"
+          },
+      };
+
+      var bubbleDiv = document.querySelector('.otu-sample-bubble');
+      
+      Plotly.newPlot(bubbleDiv, data, layout);
+      
+
+
+}
+
 
 function populatePieChart(sample_otu_distribution){
     console.log("Pie chart data");
@@ -114,10 +154,7 @@ function populateGauge(num){
             };
     
             var gauge = document.querySelector('.washing-frequency');
-
-            gauge.innerHTML = "";
-    
-            Plotly.plot(gauge, data, layout);    
+            Plotly.newPlot(gauge, data, layout);    
 }
 
 
