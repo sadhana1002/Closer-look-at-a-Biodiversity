@@ -32,7 +32,7 @@ function populateBubbleChart(otu_sample_data){
       }];
       
       var layout = {
-        title: 'Scatter Plot with a Color Dimension',
+        title: 'Germs in the sample',
         xaxis: {
             // range: [ 0, 4000 ],
             title: "OTUs"
