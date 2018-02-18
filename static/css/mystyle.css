@@ -1,0 +1,15 @@
+.row{
+    margin:5px;
+    padding:5px;
+}
+
+.container{
+    margin:5px;
+    padding:5px;
+    max-width:95%;
+}
+
+.custom-select{
+    min-width:90%;
+    max-width:95%;
+}
