@@ -20,21 +20,18 @@ def sample(sample_number):
     personal = Pybiodiversity.getPersonInfo(sample_number)
     washing_frequency = Pybiodiversity.getWashingFrequency(sample_number)
     otu_distribution = Pybiodiversity.getOtuDistribution(sample_number)
+    otu_sample = Pybiodiversity.getOtuSampleRelation(sample_number)
     data = {
         'personal':personal,
         'washing_frequency':washing_frequency,
-        'otu_distribution':otu_distribution
+        'otu_distribution':otu_distribution,
+        'otu_sample':otu_sample
     }
     return  jsonify(data)
 
 @app.route("/names")
 def names():
     data = Pybiodiversity.getSampleList()
-    return  jsonify(data)
-
-@app.route("/otu")
-def otu():
-    data = Pybiodiversity.getOtuSampleRelation()
     return  jsonify(data)
 
 @app.route("/")

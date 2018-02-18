@@ -61,9 +61,9 @@ def getPersonInfo(sample_number):
         'source':results.EVENT
     }
 
-def getOtuSampleRelation():
+def getOtuSampleRelation(sample_number):
     
-    results = session.query(Samples).all()
+    results = session.query(Samples).options(load_only(sample_number)).order_by(desc(sample_number))
     x = []
     y = []
     
@@ -80,7 +80,7 @@ def getOtuSampleRelation():
 
 def getWashingFrequency(sample_number):
     sample_id = sample_number[3:]
-    results = session.query(Samples_Metadata).    filter(Samples_Metadata.SAMPLEID == sample_id).first()
+    results = session.query(Samples_Metadata).filter(Samples_Metadata.SAMPLEID == sample_id).first()
     
     return results.WFREQ
 
