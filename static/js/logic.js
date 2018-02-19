@@ -34,7 +34,7 @@ function populateBubbleChart(otu_sample_data){
       var layout = {
         title: 'Germs in the sample',
         xaxis: {
-            // range: [ 0, 4000 ],
+             range: [ 0, 4000 ],
             title: "OTUs"
           },
           yaxis: {
