@@ -13,32 +13,43 @@ function loadsample(sample){
 }
 
 function populateBubbleChart(otu_sample_data){
-    console.log("tryyyyyyyyyyyyyyyyyyy");
-    console.log(otu_sample_data);
+    console.log("tryyyyyyyyyyyyyyyyyyy bubble");
+    console.log("test - > ",otu_sample_data['y'])
+    console.log(d3.min(otu_sample_data['y']));
+    console.log(d3.max(otu_sample_data['y']));
 
-    otu_sample_data['mode'] = 'markers';
-    otu_sample_data['marker'] = {
-          size: otu_sample_data['y'].map(d=>Math.min(d*10,60)),
-          color: otu_sample_data['y'].map(d=>100+d*20)
-                }
+    var radiusScale = d3.scaleSqrt();
+
+    radiusScale.range([0,100]);
+
+    var rMin;
+    var rMax;
+    rMin = d3.min(otu_sample_data['y']);
+    rMax = d3.max(otu_sample_data['y']);
+
+    radiusScale.domain([rMin,rMax]);
+
+    console.log("Radius ->",otu_sample_data['y'].map(d=>radiusScale(parseInt(d))))
       
       var data = [{
         'y':otu_sample_data['y'],
         'mode':'markers',
         'marker':{
-            size: otu_sample_data['y'].map(d=>d),
-            color: otu_sample_data['y'].map(d=>100+d*20)
+            size: otu_sample_data['y'].map(d=>radiusScale(parseInt(d))),
+            color: otu_sample_data['y'].map(d=>radiusScale(parseInt(d)))
                   }
       }];
+
+      console.log(data);
       
       var layout = {
         title: 'Germs in the sample',
         xaxis: {
-             range: [ 0, 4000 ],
+             range: [0, 4000],
             title: "OTUs"
           },
           yaxis: {
-            // range: [-100, 1000],
+             range: [-1000, 5000],
             title: "Intensity found in sample"
           },
       };

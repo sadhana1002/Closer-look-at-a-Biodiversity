@@ -13,3 +13,10 @@
     min-width:90%;
     max-width:95%;
 }
+
+body, div, strong {
+    font-family: 'Dosis', sans-serif;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
