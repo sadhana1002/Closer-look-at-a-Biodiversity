@@ -69,9 +69,10 @@ def getOtuSampleRelation(sample_number):
     for r in results:
         row = r.__dict__
         sample_values = list(row.values())
-        print(f"{r.otu_id}-{sample_values[2]}")
+        print(row[sample_number])
+        print(f"{r.otu_id}-{sample_values[0]}-{sample_values[1]}-{sample_values[2]}")
         x.append(r.otu_id)
-        y.append(sample_values[2])
+        y.append(row[sample_number])
 
     return{
         'x':x,

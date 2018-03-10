@@ -32,11 +32,11 @@ function populateBubbleChart(otu_sample_data){
     console.log("Radius ->",otu_sample_data['y'].map(d=>radiusScale(parseInt(d))))
       
       var data = [{
-        'y':otu_sample_data['y'],
+        y:otu_sample_data['y'].map(d=>d),
         'mode':'markers',
         'marker':{
             size: otu_sample_data['y'].map(d=>radiusScale(parseInt(d))),
-            color: otu_sample_data['y'].map(d=>radiusScale(parseInt(d)))
+            color: otu_sample_data['y'].map(d=>d)
                   }
       }];
 
@@ -45,11 +45,9 @@ function populateBubbleChart(otu_sample_data){
       var layout = {
         title: 'Germs in the sample',
         xaxis: {
-             range: [0, 4000],
             title: "OTUs"
           },
           yaxis: {
-             range: [-1000, 5000],
             title: "Intensity found in sample"
           },
       };
